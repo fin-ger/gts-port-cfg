@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    steps:
+    - uses: davidgraeff/rust-musl-action@master
     - uses: actions/checkout@v1
-    - name: Rust MUSL Builder
-      uses: juankaram/rust-musl-action@v1.0.0
+    - name: Build
+      run: cargo build --target x86_64-unknown-linux-musl --release
