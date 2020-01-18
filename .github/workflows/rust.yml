@@ -4,11 +4,9 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    container: clux/muslrust
     steps:
-    - uses: docker://clux/muslrust
     - uses: actions/checkout@v1
     - name: Build
       run: cargo build --release
