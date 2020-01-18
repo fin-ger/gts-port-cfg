@@ -5,11 +5,11 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: clux/muslrust
+    container: clux/muslrust:stable
     steps:
     - uses: actions/checkout@v1
     - name: Build
-      run: cargo +stable --target x86_64-unknown-linux-musl build --release
+      run: cargo build --target x86_64-unknown-linux-musl --release
     - name: Upload statically linked binary
       uses: actions/upload-artifact@v1
       with:
