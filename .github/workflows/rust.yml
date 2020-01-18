@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build
-      run: cargo build --release
+      run: cargo +stable build --release
     - name: Upload statically linked binary
       uses: actions/upload-artifact@v1
       with:
