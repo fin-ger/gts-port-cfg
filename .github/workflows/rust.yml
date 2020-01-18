@@ -11,8 +11,7 @@ jobs:
     - name: Build
       run: |
         HOME=/root cargo +stable build --target x86_64-unknown-linux-musl --release
-        find .
-        mv target/release/gts-port-cfg $GITHUB_WORKSPACE
+        mv target/x86_64-unknown-linux-musl/release/gts-port-cfg $GITHUB_WORKSPACE
     - name: Upload statically linked binary
       uses: actions/upload-artifact@v1
       with:
