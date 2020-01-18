@@ -12,3 +12,8 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build
       run: cargo build --release
+    - name: Upload statically linked binary
+      uses: actions/upload-artifact@v1
+      with:
+        name: gts-port-cfg
+        path: target/release/gts-port-cfg
