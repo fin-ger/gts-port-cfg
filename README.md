@@ -1,9 +1,9 @@
 <h1 align="center">Welcome to gts-port-cfg 👋</h1>
 <p align="center">
-  <a href="https://github.com/fin-ger/gts-port-cfg/actions?query=workflow%3Arust stable build">
+  <a href="https://github.com/fin-ger/gts-port-cfg/actions?query=workflow%3A%22rust+stable+build%22">
     <img src="https://github.com/fin-ger/gts-port-cfg/workflows/rust stable build/badge.svg" alt="rust stable build">
   </a>
-  <a href="https://github.com/fin-ger/gts-port-cfg/actions?query=workflow%3Arust nightly build">
+  <a href="https://github.com/fin-ger/gts-port-cfg/actions?query=workflow%3A%22rust+nightly+build%22">
     <img src="https://github.com/fin-ger/gts-port-cfg/workflows/rust nightly build/badge.svg" alt="rust nightly build">
   </a>
   <a href="https://github.com/fin-ger/gts-port-cfg/blob/master/LICENSE">
