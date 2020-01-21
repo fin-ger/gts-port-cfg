@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["Fin Christensen <christensen.fin@gmail.com>", "Johannes Wünsche <johannes@spacesnek.rocks"]
 description = "Generates an interface/port setup script for GTS/Geant VMs on stdout"
 edition = "2018"
+publish = false
 
 [dependencies]
 clap = "2.33.0"
