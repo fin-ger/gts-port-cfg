@@ -3,9 +3,6 @@
   <a href="https://github.com/fin-ger/gts-port-cfg/actions?query=workflow%3Arust stable build">
     <img src="https://github.com/fin-ger/gts-port-cfg/workflows/rust stable build/badge.svg" alt="rust stable build">
   </a>
-  <a href="https://github.com/fin-ger/gts-port-cfg/actions?query=workflow%3Arust beta build">
-    <img src="https://github.com/fin-ger/gts-port-cfg/workflows/rust beta build/badge.svg" alt="rust beta build">
-  </a>
   <a href="https://github.com/fin-ger/gts-port-cfg/actions?query=workflow%3Arust nightly build">
     <img src="https://github.com/fin-ger/gts-port-cfg/workflows/rust nightly build/badge.svg" alt="rust nightly build">
   </a>
