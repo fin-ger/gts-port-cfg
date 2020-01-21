@@ -25,6 +25,10 @@
 
 This program generates a local network setup script which creates a local network for full-mesh connected GTS Géant testbeds from a YAML configuration file.
 
+<a href="https://github.com/fin-ger/gts-port-cfg/releases/latest/download/gts-port-cfg.tar.gz">
+  <img src="https://img.shields.io/badge/download-statically%20linked-blue?logo=linux" alt="Download">
+</a>
+
 ## Usage
 
 The configuration for 4 fully connected nodes looks like this:
