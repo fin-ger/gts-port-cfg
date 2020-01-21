@@ -6,8 +6,8 @@
   <a href="https://github.com/fin-ger/gts-port-cfg/actions?query=workflow%3Arust nightly build">
     <img src="https://github.com/fin-ger/gts-port-cfg/workflows/rust nightly build/badge.svg" alt="rust nightly build">
   </a>
-  <a href="https://github.com/deinstapel/cursive-tabs/blob/master/LICENSE">
-    <img alt="GitHub" src="https://img.shields.io/github/license/deinstapel/cursive-tabs.svg">
+  <a href="https://github.com/fin-ger/gts-port-cfg/blob/master/LICENSE">
+    <img alt="GitHub" src="https://img.shields.io/github/license/fin-ger/gts-port-cfg.svg">
   </a>
   <a href="http://spacemacs.org">
     <img src="https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg" />
