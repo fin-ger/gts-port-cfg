@@ -1,6 +1,11 @@
-name: Rust
+name: rust stable build
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 9 * * 1'
 
 jobs:
   build:
