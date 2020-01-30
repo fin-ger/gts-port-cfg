@@ -180,7 +180,7 @@ If you find any bugs/unexpected behaviour or you have a proposition for future c
 **Fin Christensen**
 
 > [:octocat: `@fin-ger`](https://github.com/fin-ger)  
-> [:elephant: `@fin_ger@mastodon.social`](https://mastodon.social/web/accounts/787945)  
+> [:elephant: `@fin_ger@weirder.earth`](https://weirder.earth/@fin_ger)  
 > [:bird: `@fin_ger_github`](https://twitter.com/fin_ger_github)  
 
 <br>
