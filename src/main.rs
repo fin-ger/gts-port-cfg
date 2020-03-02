@@ -340,18 +340,10 @@ The link names specify which host is connect over which interface.",
                 ),
         )
         .arg(
-            Arg::with_name("SCRIPT")
-                .help("generate the script to set up hosts")
-                .short("s")
-                .long("script")
-                .conflicts_with("DSL"),
-        )
-        .arg(
             Arg::with_name("DSL")
                 .help("generate the DSL to allocate the hosts")
                 .short("d")
-                .long("dsl")
-                .conflicts_with("SCRIPT"),
+                .long("dsl"),
         )
         .get_matches();
     let config_filename = matches.value_of("CONFIG").unwrap();
