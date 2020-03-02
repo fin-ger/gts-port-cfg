@@ -18,11 +18,17 @@ struct Host {
     flavor: String,
     #[serde(default = "default_image")]
     image: String,
+    #[serde(default = "default_ports")]
+    ports: usize,
 }
 
 #[derive(Debug, PartialEq, Deserialize)]
 struct Config {
     hosts: Vec<Host>,
+}
+
+fn default_ports() -> usize {
+    28
 }
 
 fn default_ip() -> IpAddr {
@@ -143,6 +149,14 @@ impl Link {
 }
 
 impl DSLConfig {
+    fn set_name(&mut self, name: &str) {
+        self.id = name.to_string();
+    }
+
+    fn set_description(&mut self, desc: &str) {
+        self.description = desc.to_string();
+    }
+
     fn serialize(&self) -> String {
         let mut out = String::new();
         out.push_str(format!("{} {{\n", self.id).as_str());
@@ -160,6 +174,7 @@ impl DSLConfig {
                 format!(
                     "    adjacency {}.p{}, {}.{}\n",
                     adjacence.host1_id,
+                    //offset to index
                     adjacence.host1_port + 1,
                     adjacence.link_name,
                     adjacence.link_side
@@ -181,8 +196,8 @@ impl Host {
         out.push_str(format!("        imageId = \"{}\"\n", &self.image).as_str());
         out.push_str(format!("        flavorId = \"{}\"\n", &self.flavor).as_str());
         // Add open ports
-        for port in 0..28 {
-            out.push_str(format!("        port {{ id = \"p{}\" }}\n", port + 1).as_str());
+        for port in 1..self.ports {
+            out.push_str(format!("        port {{ id = \"p{}\" }}\n", port).as_str());
         }
         out.push_str("    }\n");
         out
@@ -339,13 +354,37 @@ The link names specify which host is connect over which interface.",
                 .long("dsl")
                 .conflicts_with("SCRIPT"),
         )
+        .arg(
+            Arg::with_name("NAME")
+                .help("name of the generated testbed configuration")
+                .requires("DSL")
+                .short("n")
+                .long("name")
+                .takes_value(true),
+        )
+        .arg(
+            Arg::with_name("DESC")
+                .help("description fo the generated testbed configuration")
+                .requires("DSL")
+                .short("e")
+                .long("description")
+                .takes_value(true),
+        )
         .get_matches();
     let config_filename = matches.value_of("CONFIG").unwrap();
 
     let config = load_config(config_filename);
 
     if matches.is_present("DSL") {
-        let dsl: DSLConfig = config.into();
+        let mut dsl: DSLConfig = config.into();
+        match matches.value_of("NAME") {
+            Some(val) => dsl.set_name(val),
+            None => {}
+        }
+        match matches.value_of("DESC") {
+            Some(desc) => dsl.set_description(desc),
+            None => {}
+        }
         println!("{}", dsl.serialize());
     } else {
         script_generation_ports(config);
