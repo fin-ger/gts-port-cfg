@@ -177,6 +177,7 @@ foobar {
         port { id = "p2" }
         port { id = "p3" }
         port { id = "p4" }
+        port { id = "p5" }
     }
     host {
         id = "node2"
@@ -186,6 +187,7 @@ foobar {
         port { id = "p1" }
         port { id = "p2" }
         port { id = "p3" }
+        port { id = "p4" }
     }
     host {
         id = "node3"
@@ -195,6 +197,7 @@ foobar {
         port { id = "p1" }
         port { id = "p2" }
         port { id = "p3" }
+        port { id = "p4" }
     }
     host {
         id = "node4"
@@ -204,6 +207,7 @@ foobar {
         port { id = "p1" }
         port { id = "p2" }
         port { id = "p3" }
+        port { id = "p4" }
     }
     link {
         id = "link1"
