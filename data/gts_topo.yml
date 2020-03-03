@@ -1,0 +1,59 @@
+testbed:
+  id: gtsscion
+  description: SCION Deployment GST
+  hosts:
+    - hostname: node1
+      ip: 172.16.0.1
+      location: ams
+      free_ports: 1
+    - hostname: node2
+      ip: 172.16.0.2
+      location: ams
+      free_ports: 1
+    - hostname: node3
+      ip: 172.16.0.3
+      location: ams
+      free_ports: 1
+    - hostname: node4
+      ip: 172.16.0.4
+      location: ams
+      free_ports: 1
+    - hostname: node5
+      ip: 172.16.0.5
+      location: ams
+      free_ports: 1
+    - hostname: node6
+      ip: 172.16.0.6
+      location: ams
+    - hostname: node7
+      ip: 172.16.0.7
+      location: par
+      free_ports: 1
+    - hostname: node8
+      ip: 172.16.0.8
+      location: par
+      free_ports: 1
+    - hostname: node9
+      ip: 172.16.0.9
+      location: par
+      free_ports: 1
+    - hostname: node10
+      ip: 172.16.0.10
+      location: ham
+      free_ports: 1
+    - hostname: node11
+      ip: 172.16.0.11
+      location: ham
+      free_ports: 1
+    - hostname: node12
+      ip: 172.16.0.12
+      location: ham
+      free_ports: 1
+    - hostname: node13
+      ip: 172.16.0.13
+      location: prg
+      free_ports: 1
+    - hostname: node14
+      ip: 172.16.0.14
+      location: prg
+      free_ports: 1

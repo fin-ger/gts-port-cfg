@@ -28,13 +28,13 @@ struct Host {
 #[derive(Debug, PartialEq, Deserialize)]
 struct Config {
     testbed: Testbed,
-    hosts: Vec<Host>,
 }
 
 #[derive(Debug, PartialEq, Deserialize)]
 struct Testbed {
     id: String,
     description: String,
+    hosts: Vec<Host>,
 }
 
 fn default_ports() -> usize {
@@ -77,8 +77,8 @@ struct DSLConfig {
 impl Into<DSLConfig> for Config {
     fn into(self) -> DSLConfig {
         let mut adjacences = Vec::new();
-        let mut new_hosts = self.hosts.clone();
-        let mut old_hosts = self.hosts.clone();
+        let mut new_hosts = self.testbed.hosts.clone();
+        let mut old_hosts = self.testbed.hosts.clone();
         let mut link_count: usize = 0;
         for (pos, host) in new_hosts.iter_mut().enumerate() {
             host.used_ports += old_hosts[pos].used_ports;
@@ -209,7 +209,7 @@ fn load_config(path: &str) -> Config {
     config
 }
 
-fn script_generation_ports(mut config: Config) {
+fn script_generation_ports(mut config: DSLConfig) {
     for (i, host) in config.hosts.iter_mut().enumerate() {
         host.internal_ip = IpAddr::V4(Ipv4Addr::new(10, 42, 42, i as u8 + 1));
     }
@@ -337,11 +337,11 @@ The link names specify which host is connect over which interface.",
     let config_filename = matches.value_of("CONFIG").unwrap();
 
     let config = load_config(config_filename);
+    let dsl: DSLConfig = config.into();
 
     if matches.is_present("DSL") {
-        let dsl: DSLConfig = config.into();
         println!("{}", dsl.serialize());
     } else {
-        script_generation_ports(config);
+        script_generation_ports(dsl);
     }
 }
