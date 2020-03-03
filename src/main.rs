@@ -297,34 +297,31 @@ fn main() {
                     "The YAML configuration file describes the topology running in GTS.
 The structure of the file looks like this:
 
-hosts:
-  - hostname: host1
-    ip: 172.16.0.108
-    devices:
-      ens6: link1
-      ens7: link2
-      ens8: link3
-  - hostname: host2
-    ip: 172.16.0.109
-    devices:
-      ens6: link1
-      ens7: link5
-      ens8: link6
-  - hostname: host3
-    ip: 172.16.0.106
-    devices:
-      ens6: link3
-      ens7: link4
-      ens8: link5
-  - hostname: host4
-    ip: 172.16.0.107
-    devices:
-      ens6: link2
-      ens7: link4
-      ens8: link6
+testbed:
+  id: foobar
+  description: Foo that bar
+  hosts:
+    - hostname: node1
+      ip: 172.16.0.108
+      location: ams
+      free_ports: 1
+    - hostname: node2
+      ip: 172.16.0.109
+      location: ams
+      flavor: c4r4h20
+    - hostname: node3
+      ip: 172.16.0.106
+      location: ham
+      image: FreeBSD-11.qcow2
+    - hostname: node4
+      ip: 172.16.0.107
+      location: ams
 
-The `ip` property is identifying the machines. The hostname will be set for the machine.
-The link names specify which host is connect over which interface.",
+The `ip` property is identifying the machines. The hostname will be set for the
+machine. The link names specify which host is connected over which interface.
+The `image`, `free_ports`, and `flavor` properties are optional and have to be
+set to valid values provided by gts. When they are not set, a default value will
+be chosen by GTS.",
                 ),
         )
         .arg(

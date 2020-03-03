@@ -55,7 +55,11 @@ testbed:
       location: ams
 ```
 
-> The `image`, `free_ports` and `flavor` properties are optional and have to be set to the given values from gts, when they are not set a default value will be chosen instead.
+> The `ip` property is identifying the machines. The hostname will be set for the
+> machine. The link names specify which host is connected over which interface.
+> The `image`, `free_ports`, and `flavor` properties are optional and have to be
+> set to valid values provided by gts. When they are not set, a default value will
+> be chosen by GTS.
 
 ### Known issues
 
