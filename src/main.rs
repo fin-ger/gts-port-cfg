@@ -1,17 +1,18 @@
 use clap::{App, Arg};
 use itertools::Itertools;
 use serde::Deserialize;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use std::fs::File;
 use std::net::{IpAddr, Ipv4Addr};
 use std::usize::MAX;
 
-#[derive(Debug, PartialEq, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Deserialize)]
 struct Host {
     hostname: String,
     ip: IpAddr,
     #[serde(skip, default = "default_ip")]
     internal_ip: IpAddr,
+    #[serde(skip)]
     devices: HashMap<String, String>,
     location: String,
     #[serde(default = "default_flavor")]
@@ -19,7 +20,9 @@ struct Host {
     #[serde(default = "default_image")]
     image: String,
     #[serde(default = "default_ports")]
-    ports: usize,
+    free_ports: usize,
+    #[serde(skip)]
+    used_ports: usize,
 }
 
 #[derive(Debug, PartialEq, Deserialize)]
@@ -35,7 +38,7 @@ struct Testbed {
 }
 
 fn default_ports() -> usize {
-    28
+    0
 }
 
 fn default_ip() -> IpAddr {
@@ -50,7 +53,7 @@ fn default_flavor() -> String {
     "c2r2h20".to_string()
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 struct Adjacency {
     host1_id: String,
     host1_port: usize,
@@ -58,6 +61,7 @@ struct Adjacency {
     link_side: String,
 }
 
+#[derive(PartialEq, Debug)]
 struct Link {
     id: String,
 }
@@ -72,73 +76,57 @@ struct DSLConfig {
 
 impl Into<DSLConfig> for Config {
     fn into(self) -> DSLConfig {
-        let link_names = self.hosts.iter().fold(HashSet::new(), |mut acc, x| {
-            for (_, link) in x.devices.iter() {
-                acc.insert(link);
+        let mut adjacences = Vec::new();
+        let mut new_hosts = self.hosts.clone();
+        let mut old_hosts = self.hosts.clone();
+        let mut link_count: usize = 0;
+        for (pos, host) in new_hosts.iter_mut().enumerate() {
+            host.used_ports += old_hosts[pos].used_ports;
+            for other in old_hosts.iter_mut().skip(pos + 1) {
+                host.used_ports += 1;
+                other.used_ports += 1;
+                link_count += 1;
+                adjacences.push(Adjacency {
+                    host1_id: host.hostname.clone(),
+                    host1_port: host.used_ports,
+                    link_name: format!("link{}", link_count),
+                    link_side: "src".to_string(),
+                });
+                adjacences.push(Adjacency {
+                    host1_id: other.hostname.clone(),
+                    host1_port: other.used_ports,
+                    link_name: format!("link{}", link_count),
+                    link_side: "dst".to_string(),
+                });
             }
-            acc
-        });
+        }
 
-        let link_list = link_names
+        let link_list = adjacences
             .iter()
-            .map(|x| Link {
-                id: (*x).to_string(),
+            .map(|adj| Link {
+                id: adj.link_name.clone(),
             })
+            .dedup()
             .collect();
 
-        let link_props = self.hosts.iter().fold(Vec::new(), |mut acc, x| {
-            let mut ord_links = x
-                .devices
+        for host in new_hosts.iter_mut() {
+            let host_name = host.hostname.clone();
+            for (num, link) in adjacences
                 .iter()
-                .fold(Vec::new(), |mut links, (_, link_name)| {
-                    links.push(link_name);
-                    links
-                });
-            ord_links.sort();
-            acc.push((&x.hostname, ord_links));
-            acc
-        });
-
-        let adjacencies: Vec<Vec<Adjacency>> = link_names.iter().map(|elem| {
-            let list_of_links: Vec<&(&String, Vec<&String>)> = link_props.iter().filter(|(_, links)| links.contains(elem)).collect();
-            match  list_of_links.len() {
-                0 => {
-                    eprintln!("Link of name {} is not part of any host.", elem);
-                    std::process::exit(3)
-                },
-                1 => {
-                    eprintln!("Link of name {} is only connected to one host. Name the Link in another hosts device to connect them.", elem);
-                    std::process::exit(4)
-                },
-                2 => {
-                    vec![
-                    Adjacency {
-                        host1_id: list_of_links[0].0.clone(),
-                        host1_port: list_of_links[0].1.binary_search(elem).unwrap(),
-                        link_name: (*elem).to_string(),
-                        link_side: "src".to_string(),
-                    },
-                    Adjacency {
-                        host1_id: list_of_links[1].0.clone(),
-                        host1_port: list_of_links[1].1.binary_search(elem).unwrap(),
-                        link_name: (*elem).to_string(),
-                        link_side: "dst".to_string(),
-                    },
-                    ]
-                }
-                _ => {
-                    eprintln!("To many hosts are connected to link {}", elem);
-                    std::process::exit(5)
-                },
+                .filter(|elem| elem.host1_id == host_name)
+                .enumerate()
+            {
+                host.devices
+                    .insert(format!("ens{}", num + 6), link.link_name.clone());
             }
-        }).collect();
+        }
 
         DSLConfig {
             description: self.testbed.description,
             id: self.testbed.id,
-            hosts: self.hosts,
+            hosts: new_hosts,
             link: link_list,
-            adjacents: adjacencies.concat(),
+            adjacents: adjacences,
         }
     }
 }
@@ -195,7 +183,7 @@ impl Host {
         out.push_str(format!("        imageId = \"{}\"\n", &self.image).as_str());
         out.push_str(format!("        flavorId = \"{}\"\n", &self.flavor).as_str());
         // Add open ports
-        for port in 1..=self.ports {
+        for port in 1..=(self.free_ports + self.used_ports) {
             out.push_str(format!("        port {{ id = \"p{}\" }}\n", port).as_str());
         }
         out.push_str("    }\n");
@@ -352,7 +340,7 @@ The link names specify which host is connect over which interface.",
 
     if matches.is_present("DSL") {
         let dsl: DSLConfig = config.into();
-        println!("{}", dsl.serialize());
+        println!("{}", dsl.serialize()):;
     } else {
         script_generation_ports(config);
     }
