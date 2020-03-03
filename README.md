@@ -57,6 +57,10 @@ testbed:
 
 > The `image`, `free_ports` and `flavor` properties are optional and have to be set to the given values from gts, when they are not set a default value will be chosen instead.
 
+### Known issues
+
+ - IP addresses are not respected by the GTS DSL
+
 ### Script
 
 Use this configuration file to generate a shell script which sets up a `10.42.42.0/24` network for these nodes.
