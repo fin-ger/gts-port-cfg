@@ -11,3 +11,9 @@ clap = "2.33.0"
 serde = { version = "1.0.104", features = ["derive"] }
 serde_yaml = "0.8.11"
 itertools = "0.8.2"
+
+[profile.release]
+opt-level = 'z'  # Optimize for size.
+lto = true
+codegen-units = 1
+panic = 'abort'
