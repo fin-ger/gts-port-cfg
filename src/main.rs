@@ -340,7 +340,7 @@ The link names specify which host is connect over which interface.",
 
     if matches.is_present("DSL") {
         let dsl: DSLConfig = config.into();
-        println!("{}", dsl.serialize()):;
+        println!("{}", dsl.serialize());
     } else {
         script_generation_ports(config);
     }
