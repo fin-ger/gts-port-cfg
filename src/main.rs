@@ -183,7 +183,7 @@ impl Host {
         out.push_str(format!("        imageId = \"{}\"\n", &self.image).as_str());
         out.push_str(format!("        flavorId = \"{}\"\n", &self.flavor).as_str());
         // Add open ports
-        for port in 1..=(self.free_ports + self.used_ports) {
+        for port in 1..=(self.free_ports + self.used_ports + 1) {
             out.push_str(format!("        port {{ id = \"p{}\" }}\n", port).as_str());
         }
         out.push_str("    }\n");
