@@ -1,6 +1,6 @@
 testbed:
   id: gtsscion
-  description: SCION Deployment GST
+  description: SCION Deployment GTS
   hosts:
     - hostname: node1
       ip: 172.16.0.1
