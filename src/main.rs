@@ -66,6 +66,7 @@ struct Link {
     id: String,
 }
 
+#[derive(Debug)]
 struct DSLConfig {
     description: String,
     id: String,
@@ -117,7 +118,7 @@ impl Into<DSLConfig> for Config {
                 .enumerate()
             {
                 host.devices
-                    .insert(format!("ens{}", num + 6), link.link_name.clone());
+                    .insert(format!("ens{}", num + 7), link.link_name.clone());
             }
         }
 
