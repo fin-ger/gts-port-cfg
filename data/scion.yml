@@ -3,72 +3,72 @@ testbed:
   description: SCION Deployment GTS
   hosts:
     - hostname: node1
-      ip: 172.16.0.1
+      ip: 172.16.0.143
       location: ams
       flavor: c4r4h20
       free_ports: 1
     - hostname: node2
-      ip: 172.16.0.2
+      ip: 172.16.0.137
       location: ams
       flavor: c2r2h20
       free_ports: 1
     - hostname: node3
-      ip: 172.16.0.3
+      ip: 172.16.0.146
       location: ams
       flavor: c2r2h20
       free_ports: 1
     - hostname: node4
-      ip: 172.16.0.4
+      ip: 172.16.0.136
       location: ams
       flavor: c2r2h20
       free_ports: 1
     - hostname: node5
-      ip: 172.16.0.5
+      ip: 172.16.0.144
       location: ams
       flavor: c2r2h20
       free_ports: 1
     - hostname: node6
-      ip: 172.16.0.6
+      ip: 172.16.0.142
       location: ams
       flavor: c2r2h20
       free_ports: 1
     - hostname: node7
-      ip: 172.16.0.7
+      ip: 172.16.0.145
       location: par
       flavor: c4r4h20
       free_ports: 1
     - hostname: node8
-      ip: 172.16.0.8
+      ip: 172.16.0.148
       location: par
       flavor: c2r2h20
       free_ports: 1
     - hostname: node9
-      ip: 172.16.0.9
+      ip: 172.16.0.147
       location: par
       flavor: c2r2h20
       free_ports: 1
     - hostname: node10
-      ip: 172.16.0.10
+      ip: 172.16.0.141
       location: ham
       flavor: c4r4h20
       free_ports: 1
     - hostname: node11
-      ip: 172.16.0.11
+      ip: 172.16.0.139
       location: ham
       flavor: c2r2h20
       free_ports: 1
     - hostname: node12
-      ip: 172.16.0.12
+      ip: 172.16.0.149
       location: ham
       flavor: c2r2h20
       free_ports: 1
     - hostname: node13
-      ip: 172.16.0.13
+      ip: 172.16.0.138
       location: prg
       flavor: c4r4h20
       free_ports: 1
     - hostname: node14
-      ip: 172.16.0.14
+      ip: 172.16.0.140
       location: prg
       flavor: c2r2h20
       free_ports: 1
