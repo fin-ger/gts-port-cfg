@@ -3,22 +3,22 @@ testbed:
   description: SCION Deployment DFN
   network: 10.43.43.0
   hosts:
-    - hostname: ams0
+    - hostname: dfn0
       ip: 172.16.0.143
       location: erl
       flavor: c4r8h20
       free_ports: 4
-    - hostname: ams1
+    - hostname: dfn1
       ip: 172.16.0.137
       location: erl
       flavor: c4r8h20
       free_ports: 4
-    - hostname: ams2
+    - hostname: dfn2
       ip: 172.16.0.146
       location: erl
       flavor: c4r8h20
       free_ports: 4
-    - hostname: ams3
+    - hostname: dfn3
       ip: 172.16.0.136
       location: erl
       flavor: c4r8h20
