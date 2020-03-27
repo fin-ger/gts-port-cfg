@@ -34,6 +34,7 @@ struct Config {
 struct Testbed {
     id: String,
     description: String,
+    network: Ipv4Addr,
     hosts: Vec<Host>,
 }
 
@@ -68,6 +69,7 @@ struct Link {
 
 #[derive(Debug)]
 struct DSLConfig {
+    network: Ipv4Addr,
     description: String,
     id: String,
     hosts: Vec<Host>,
@@ -123,6 +125,7 @@ impl Into<DSLConfig> for Config {
         }
 
         DSLConfig {
+            network: self.testbed.network,
             description: self.testbed.description,
             id: self.testbed.id,
             hosts: new_hosts,
@@ -211,8 +214,11 @@ fn load_config(path: &str) -> Config {
 }
 
 fn script_generation_ports(mut config: DSLConfig) {
+    let network = config.network.octets();
     for (i, host) in config.hosts.iter_mut().enumerate() {
-        host.internal_ip = IpAddr::V4(Ipv4Addr::new(10, 42, 42, i as u8 + 1));
+        host.internal_ip = IpAddr::V4(Ipv4Addr::new(
+          network[0], network[1], network[2], i as u8 + 1
+        ));
     }
 
     let mut script = String::from(

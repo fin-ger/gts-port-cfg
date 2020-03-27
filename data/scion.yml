@@ -1,73 +1,74 @@
 testbed:
   id: gtsscion
   description: SCION Deployment GTS
+  network: 10.42.42.0
   hosts:
-    - hostname: node1
+    - hostname: ams0
       ip: 172.16.0.143
       location: ams
       flavor: c4r4h20
       free_ports: 1
-    - hostname: node2
+    - hostname: ams1
       ip: 172.16.0.137
       location: ams
       flavor: c2r2h20
       free_ports: 1
-    - hostname: node3
+    - hostname: ams2
       ip: 172.16.0.146
       location: ams
       flavor: c2r2h20
       free_ports: 1
-    - hostname: node4
+    - hostname: ams3
       ip: 172.16.0.136
       location: ams
       flavor: c2r2h20
       free_ports: 1
-    - hostname: node5
+    - hostname: ams4
       ip: 172.16.0.144
       location: ams
       flavor: c2r2h20
       free_ports: 1
-    - hostname: node6
+    - hostname: ams5
       ip: 172.16.0.142
       location: ams
       flavor: c2r2h20
       free_ports: 1
-    - hostname: node7
+    - hostname: par0
       ip: 172.16.0.145
       location: par
       flavor: c4r4h20
       free_ports: 1
-    - hostname: node8
+    - hostname: par1
       ip: 172.16.0.148
       location: par
       flavor: c2r2h20
       free_ports: 1
-    - hostname: node9
+    - hostname: par2
       ip: 172.16.0.147
       location: par
       flavor: c2r2h20
       free_ports: 1
-    - hostname: node10
+    - hostname: ham0
       ip: 172.16.0.141
       location: ham
       flavor: c4r4h20
       free_ports: 1
-    - hostname: node11
+    - hostname: ham1
       ip: 172.16.0.139
       location: ham
       flavor: c2r2h20
       free_ports: 1
-    - hostname: node12
+    - hostname: ham2
       ip: 172.16.0.149
       location: ham
       flavor: c2r2h20
       free_ports: 1
-    - hostname: node13
+    - hostname: prg0
       ip: 172.16.0.138
       location: prg
       flavor: c4r4h20
       free_ports: 1
-    - hostname: node14
+    - hostname: prg1
       ip: 172.16.0.140
       location: prg
       flavor: c2r2h20
