@@ -4,23 +4,27 @@ testbed:
   network: 10.43.43.0
   hosts:
     - hostname: dfn0
-      ip: 172.16.0.143
+      ip: 172.16.0.15
       location: erl
       flavor: c4r8h20
+      image: Ubuntu-16.04.qcow2
       free_ports: 4
     - hostname: dfn1
-      ip: 172.16.0.137
+      ip: 172.16.0.16
       location: erl
       flavor: c4r8h20
+      image: Ubuntu-16.04.qcow2
       free_ports: 4
     - hostname: dfn2
-      ip: 172.16.0.146
+      ip: 172.16.0.17
       location: erl
       flavor: c4r8h20
+      image: Ubuntu-16.04.qcow2
       free_ports: 4
     - hostname: dfn3
-      ip: 172.16.0.136
+      ip: 172.16.0.18
       location: erl
       flavor: c4r8h20
+      image: Ubuntu-16.04.qcow2
       free_ports: 4
 
