@@ -233,7 +233,7 @@ case $IP_ADDRESS in
         script.push_str(format!("  {host_ip})\n", host_ip = host.ip).as_str());
         script.push_str(
             format!(
-                "    sudo hostnamectl set-hostname {hostname}\n",
+                "   # sudo hostnamectl set-hostname {hostname}\n",
                 hostname = host.hostname,
             )
             .as_str(),
